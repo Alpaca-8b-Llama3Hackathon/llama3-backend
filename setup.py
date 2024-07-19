@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='flashcard_backend',
+    name='flashcard-backend',
     version='0.4',
     packages=["flashcard_backend"],
     # install_requires=[
