@@ -1,6 +1,13 @@
 # llama3-backend
 
 ## Installation
+The following packages are required to be installed before installing the `llama3-backend` package.
+```bash
+    #     "llama-index",
+    #     "llama-index-embeddings-together",
+    #     "llama-index-llms-openai-like",
+    #     "llama-index-vector-stores-faiss"
+```
 ```bash
 pip install git+https://github.com/Alpaca-8b-Llama3Hackathon/llama3-backend.git
 ```
@@ -42,7 +49,7 @@ if __name__ == "__main__":
     # '''
     # """.format(context=retreive_text, question="How to do multi-camera calibration?")
     # res = llm.complete(prompt)
-    
+
     query_engine = index.as_query_engine()
     query = "What is the purpose of the paper?"
     response = query_engine.query(query)
