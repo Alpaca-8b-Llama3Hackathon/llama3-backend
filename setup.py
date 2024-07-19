@@ -1,9 +1,9 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-    name='flashcard-backend',
-    version='0.5',
-    packages=["flashcard_backend"],
+    name='flashcard_backend',
+    version='0.6',
+    packages=find_packages(),
     # install_requires=[
     #     "llama-index",
     #     "llama-index-embeddings-together",
