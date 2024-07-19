@@ -1,1 +1,1 @@
-from .index import create_index_from_text, save_index, load_index
+from flashcard_backend.vector.index import create_index_from_text, save_index, load_index

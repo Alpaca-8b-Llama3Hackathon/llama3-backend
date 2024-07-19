@@ -1,1 +1,1 @@
-from .base_model import get_model, get_embedding
+from flashcard_backend.model.base_model import get_model, get_embedding
