@@ -1,0 +1,6 @@
+README.md
+setup.py
+flashcard_backend.egg-info/PKG-INFO
+flashcard_backend.egg-info/SOURCES.txt
+flashcard_backend.egg-info/dependency_links.txt
+flashcard_backend.egg-info/top_level.txt
