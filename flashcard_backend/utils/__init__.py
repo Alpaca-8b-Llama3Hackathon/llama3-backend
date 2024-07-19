@@ -1,1 +1,0 @@
-from flashcard_backend.utils.reader import pdf_to_text

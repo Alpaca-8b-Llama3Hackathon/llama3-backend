@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='flashcard_backend',
-    version='0.3',
+    version='0.4',
     packages=["flashcard_backend"],
     # install_requires=[
     #     "llama-index",

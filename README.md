@@ -14,9 +14,9 @@ pip install git+https://github.com/Alpaca-8b-Llama3Hackathon/llama3-backend.git
 
 ## Usage
 ```python
-from flashcard_backend.utils import pdf_to_text
-from flashcard_backend.model import get_model, get_embedding
-from flashcard_backend import create_index_from_text, save_index, load_index
+from flashcard_backend.utils.reader import pdf_to_text
+from flashcard_backend.model.base_model import get_model, get_embedding
+from flashcard_backend.vector.index import create_index_from_text, save_index, load_index
 from llama_index.core import ServiceContext
 
 import os
