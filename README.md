@@ -3,19 +3,34 @@
 ## Installation
 The following packages are required to be installed before installing the `llama3-backend` package.
 ```bash
-    #     "llama-index",
-    #     "llama-index-embeddings-together",
-    #     "llama-index-llms-openai-like",
-    #     "llama-index-vector-stores-faiss"
+#     "llama-index",
+#     "llama-index-embeddings-together",
+#     "llama-index-llms-openai-like",
+#     "llama-index-vector-stores-faiss"
+#     "pymilvus"
+#     "llama-index-vector-stores-milvus"
 ```
 ```bash
 pip install git+https://github.com/Alpaca-8b-Llama3Hackathon/llama3-backend.git
 ```
-
-## Usage
+## Usage (Question Answering pairs)
 ```python
-from flashcard_backend.utils.reader import pdf_to_text
-from flashcard_backend.model.base_model import get_model, get_embedding
+from flashcard_backend.question import get_questions
+import dotenv
+dotenv.load_dotenv()
+path = "/home/monsh/works/Visual_on-line_learning_in_distributed_camera_netw.pdf"
+questions_and_answers = get_questions(path, api_key=os.getenv("TOGETHER_API_KEY"))
+
+for question, answer in questions_and_answers:
+    print(f"Question: {question}")
+    print(f"Answer: {answer}")
+    print()
+```
+
+
+## Usage (Deprecated)
+```python
+from flashcard_backend.model import get_model, get_embedding
 from flashcard_backend.vector.index import create_index_from_text, save_index, load_index
 from llama_index.core import ServiceContext
 
