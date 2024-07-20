@@ -4,7 +4,4 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "flashcard_backend"
-dynamic = ["version", "readme"]
-
-[tool.setuptools.dynamic]
-version = {attr = "flashcard_backend.VERSION"}
+version = "0.8"
