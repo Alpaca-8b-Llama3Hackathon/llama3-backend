@@ -1,8 +1,9 @@
 from llama_index.llms.openai_like import OpenAILike
 from llama_index.core.node_parser import SentenceSplitter
 from PyPDF2 import PdfReader
-import os
+import re
 from llama_index.core import Document
+from typing import List, Tuple
 from llama_index.core.extractors import (
     QuestionsAnsweredExtractor,
     TitleExtractor,
@@ -24,13 +25,27 @@ Higher-level summaries of surrounding context may be provided \
 as well. Try using these summaries to generate better questions \
 that this context can answer. \
 
-Please provide only the questions. \
-Examples of questions: \
-- What is the main idea of the text? \
-- What is the author's purpose in writing the text?
+Please Reply with only the questions and answer. \
+    Examples of questions and answer: \
+- Question 1 : What is the main idea of the text? \
+    Answer 1 : Answer your Question \
+- Question 2 : What is the author's purpose in writing the text? \
+    Answer 2 : Answer your Question \
 """
 
-def get_questions(file: str, api_key: str, question_template: str = question_template):
+def extract_qa_pairs(qa_string):
+    # Regular expression pattern to match questions and answers
+    pattern = r'\*\*Question (\d+):\*\* (.*?)\s*\*\*Answer \1:\*\* (.*?)(?=\*\*|$)'
+    
+    # Find all matches in the qa_string
+    matches = re.findall(pattern, qa_string, re.DOTALL)
+    
+    # Create a list of dictionaries containing question-answer pairs
+    qa_pairs = [{"question": q.strip(), "answer": a.strip()} for _, q, a in matches]
+        
+    return qa_pairs
+
+def get_questions(file: str, api_key: str, question_template: str = question_template) -> List[Tuple[str, str]]:
     assert "{context_str}" in question_template, "Prompt template must contain {context_str} placeholder"
     assert "{num_questions}" in question_template, "Prompt template must contain {num_questions} placeholder"
 
@@ -58,4 +73,14 @@ def get_questions(file: str, api_key: str, question_template: str = question_tem
     question_gen_pipeline = IngestionPipeline(transformations=[text_splitter, TitleExtractor(nodes=3, llm=llm), question_generator])
     questions = question_gen_pipeline.run(nodes=nodes)
     
-    return questions
+    results = []
+    for question in questions:
+        qa = str(question.to_dict()['metadata']['questions_this_excerpt_can_answer'])
+        
+        # Extract question-answer pairs
+        qa_pairs = extract_qa_pairs(qa)
+        
+        for i, pair in enumerate(qa_pairs, 1):
+            results.append((pair['question'], pair['answer']))
+
+    return results        
