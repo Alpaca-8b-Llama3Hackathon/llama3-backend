@@ -1,11 +1,17 @@
-from setuptools import setup, find_packages
+from setuptools import setup
+import os
+from pathlib import Path
+root = os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir))
+os.chdir(root)
+
+root = Path(__file__).parent
+os.chdir(str(root))
 
 setup(
     name='flashcard_backend',
-    version='0.8',
-    packages=find_packages(where='flashcard_backend'),
-    package_dir={"": 'flashcard_backend'},
-    url="https://github.com/Alpaca-8b-Llama3Hackathon/llama3-backend"
+    version='1.0',
+    packages=['flashcard_backend']
+    # package_dir={"": 'flashcard_backend'},
     
     # package_dir={'flashcard_backend': 'flashcard_backend'},
     # package_data={'flashcard_backend': ['*.py']},

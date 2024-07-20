@@ -4,4 +4,4 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "flashcard_backend"
-version = "0.8"
+version = "1.0"
