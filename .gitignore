@@ -1,8 +1,12 @@
+*.db
+local_*.py
+*.ipynb
+local_index/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
 
