@@ -4,11 +4,7 @@ from PyPDF2 import PdfReader
 import re
 from llama_index.core import Document
 from typing import List, Tuple
-from llama_index.core.extractors import (
-    QuestionsAnsweredExtractor,
-    TitleExtractor,
-)
-# from llama_index.extractors.entity import EntityExtractor
+from llama_index.core.extractors import QuestionsAnsweredExtractor
 from llama_index.core.node_parser import TokenTextSplitter
 from llama_index.core.schema import MetadataMode
 from llama_index.core.ingestion import IngestionPipeline
@@ -70,7 +66,7 @@ def get_questions(file: str, api_key: str, question_template: str = question_tem
 
     question_generator = QuestionsAnsweredExtractor(
         questions=1, metadata_mode=MetadataMode.EMBED, prompt_template=question_template, llm=llm)
-    question_gen_pipeline = IngestionPipeline(transformations=[text_splitter, TitleExtractor(nodes=3, llm=llm), question_generator])
+    question_gen_pipeline = IngestionPipeline(transformations=[text_splitter, question_generator])
     questions = question_gen_pipeline.run(nodes=nodes)
     
     results = []

@@ -9,7 +9,7 @@ os.chdir(str(root))
 
 setup(
     name='flashcard_backend',
-    version='1.1-lite',
+    version='1.2-lite',
     packages=['flashcard_backend']
     # package_dir={"": 'flashcard_backend'},
     
