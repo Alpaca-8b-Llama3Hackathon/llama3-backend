@@ -56,7 +56,7 @@ def get_questions(file: str, api_key: str, question_template: str = question_tem
         api_key=api_key,
         is_chat_model=True,
         is_function_calling_model=True,
-        temperature=0.1,
+        temperature=0.6,
     )
     splitter = SentenceSplitter(chunk_size=2400, chunk_overlap=500)
     nodes = splitter.get_nodes_from_documents([Document(text=text)])
@@ -65,7 +65,7 @@ def get_questions(file: str, api_key: str, question_template: str = question_tem
     )
 
     question_generator = QuestionsAnsweredExtractor(
-        questions=1, metadata_mode=MetadataMode.EMBED, prompt_template=question_template, llm=llm)
+        questions=2, metadata_mode=MetadataMode.EMBED, prompt_template=question_template, llm=llm)
     question_gen_pipeline = IngestionPipeline(transformations=[text_splitter, question_generator])
     questions = question_gen_pipeline.run(nodes=nodes)
     
